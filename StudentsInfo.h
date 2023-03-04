@@ -477,10 +477,14 @@ namespace Dziennik {
 	}
 	private: System::Void btnReset_Click(System::Object^ sender, System::EventArgs^ e) {
 		try {
-
+			System::Windows::Forms::DialogResult iReset;
+			iReset = MessageBox::Show("Confirm you want to reset it", "C++ AccessDatabase Connector", MessageBoxButtons::YesNo, MessageBoxIcon::Information);
+			if (iReset == System::Windows::Forms::DialogResult::Yes) {
+				Clear();
+			}
 		}
 		catch (Exception^ ex) {
-			MessageBox::Show
+			MessageBox::Show(ex->Message, "C++ AccessDatabase Connector", MessageBoxButtons::OK, MessageBoxIcon::Information);
 		}
 	}
 };
