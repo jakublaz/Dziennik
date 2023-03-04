@@ -26,9 +26,6 @@ namespace Dziennik {
 		MyForm(void)
 		{
 			InitializeComponent();
-			//
-			//TODO: W tym miejscu dodaj kod konstruktora
-			//
 		}
 
 	protected:
@@ -70,6 +67,9 @@ namespace Dziennik {
 	private: System::Windows::Forms::DataGridView^ dataGridViewMainMenu;
 	private: System::Windows::Forms::Button^ btnExit;
 	private: System::Windows::Forms::Button^ btnStudentInfo;
+	private: System::Windows::Forms::Timer^ timerMyForm;
+
+	private: System::ComponentModel::IContainer^ components;
 
 
 
@@ -89,7 +89,7 @@ namespace Dziennik {
 		/// <summary>
 		/// Wymagana zmienna projektanta.
 		/// </summary>
-		System::ComponentModel::Container ^components;
+
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
@@ -98,11 +98,13 @@ namespace Dziennik {
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			this->components = (gcnew System::ComponentModel::Container());
 			this->btnAttendance = (gcnew System::Windows::Forms::Button());
 			this->txtSearch = (gcnew System::Windows::Forms::TextBox());
 			this->dataGridViewMainMenu = (gcnew System::Windows::Forms::DataGridView());
 			this->btnExit = (gcnew System::Windows::Forms::Button());
 			this->btnStudentInfo = (gcnew System::Windows::Forms::Button());
+			this->timerMyForm = (gcnew System::Windows::Forms::Timer(this->components));
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridViewMainMenu))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -164,6 +166,11 @@ namespace Dziennik {
 			this->btnStudentInfo->UseVisualStyleBackColor = true;
 			this->btnStudentInfo->Click += gcnew System::EventHandler(this, &MyForm::btnStudentInfo_Click);
 			// 
+			// timerMyForm
+			// 
+			this->timerMyForm->Interval = 1000;
+			this->timerMyForm->Tick += gcnew System::EventHandler(this, &MyForm::timer1_Tick);
+			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
@@ -213,13 +220,17 @@ namespace Dziennik {
 	}
 	private: System::Void MyForm_Load(System::Object^ sender, System::EventArgs^ e) {
 		ConnectionDB();
+		timerMyForm->Start();
 	}
 	private: System::Void btnExit_Click(System::Object^ sender, System::EventArgs^ e) {
-		this->Close();
+		Application::Exit();
 	}
 	private: System::Void btnStudentInfo_Click(System::Object^ sender, System::EventArgs^ e) {
 		StudentsInfo^ si = gcnew StudentsInfo();
 		si->ShowDialog();
 	}
-	};
+	private: System::Void timer1_Tick(System::Object^ sender, System::EventArgs^ e) {
+		ConnectionDB();
+	}
+};
 }
