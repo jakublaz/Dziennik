@@ -55,7 +55,7 @@ namespace Dziennik {
 	private: System::Windows::Forms::Button^ btnUpdate;
 	private: System::Windows::Forms::Button^ btnReset;
 	private: System::Windows::Forms::Button^ btnDelete;
-	private: System::Windows::Forms::Button^ btnMainMenu;
+
 	private: System::Windows::Forms::Button^ btnGoBack;
 	private: System::Windows::Forms::DataGridView^ dataGridView2;
 
@@ -95,7 +95,6 @@ namespace Dziennik {
 			this->btnUpdate = (gcnew System::Windows::Forms::Button());
 			this->btnReset = (gcnew System::Windows::Forms::Button());
 			this->btnDelete = (gcnew System::Windows::Forms::Button());
-			this->btnMainMenu = (gcnew System::Windows::Forms::Button());
 			this->btnGoBack = (gcnew System::Windows::Forms::Button());
 			this->dataGridView2 = (gcnew System::Windows::Forms::DataGridView());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView2))->BeginInit();
@@ -232,10 +231,10 @@ namespace Dziennik {
 			this->txtSearch->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 30, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(238)));
 			this->txtSearch->ForeColor = System::Drawing::SystemColors::Menu;
-			this->txtSearch->Location = System::Drawing::Point(135, 6);
+			this->txtSearch->Location = System::Drawing::Point(147, 7);
 			this->txtSearch->Multiline = true;
 			this->txtSearch->Name = L"txtSearch";
-			this->txtSearch->Size = System::Drawing::Size(554, 88);
+			this->txtSearch->Size = System::Drawing::Size(691, 88);
 			this->txtSearch->TabIndex = 25;
 			this->txtSearch->Text = L"Search";
 			this->txtSearch->TextChanged += gcnew System::EventHandler(this, &StudentsInfo::txtSearch_TextChanged);
@@ -244,7 +243,7 @@ namespace Dziennik {
 			// 
 			this->btnAdd->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 19.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(238)));
-			this->btnAdd->Location = System::Drawing::Point(695, 5);
+			this->btnAdd->Location = System::Drawing::Point(844, 6);
 			this->btnAdd->Name = L"btnAdd";
 			this->btnAdd->Size = System::Drawing::Size(95, 88);
 			this->btnAdd->TabIndex = 26;
@@ -256,7 +255,7 @@ namespace Dziennik {
 			// 
 			this->btnUpdate->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 19.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(238)));
-			this->btnUpdate->Location = System::Drawing::Point(796, 6);
+			this->btnUpdate->Location = System::Drawing::Point(945, 7);
 			this->btnUpdate->Name = L"btnUpdate";
 			this->btnUpdate->Size = System::Drawing::Size(148, 88);
 			this->btnUpdate->TabIndex = 27;
@@ -267,40 +266,31 @@ namespace Dziennik {
 			// 
 			this->btnReset->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 19.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(238)));
-			this->btnReset->Location = System::Drawing::Point(948, 5);
+			this->btnReset->Location = System::Drawing::Point(1097, 6);
 			this->btnReset->Name = L"btnReset";
 			this->btnReset->Size = System::Drawing::Size(137, 88);
 			this->btnReset->TabIndex = 28;
 			this->btnReset->Text = L"Reset";
 			this->btnReset->UseVisualStyleBackColor = true;
+			this->btnReset->Click += gcnew System::EventHandler(this, &StudentsInfo::btnReset_Click);
 			// 
 			// btnDelete
 			// 
 			this->btnDelete->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 19.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(238)));
-			this->btnDelete->Location = System::Drawing::Point(1091, 7);
+			this->btnDelete->Location = System::Drawing::Point(1240, 8);
 			this->btnDelete->Name = L"btnDelete";
 			this->btnDelete->Size = System::Drawing::Size(137, 88);
 			this->btnDelete->TabIndex = 29;
 			this->btnDelete->Text = L"Delete";
 			this->btnDelete->UseVisualStyleBackColor = true;
-			// 
-			// btnMainMenu
-			// 
-			this->btnMainMenu->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 19.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(238)));
-			this->btnMainMenu->Location = System::Drawing::Point(1234, 7);
-			this->btnMainMenu->Name = L"btnMainMenu";
-			this->btnMainMenu->Size = System::Drawing::Size(142, 88);
-			this->btnMainMenu->TabIndex = 30;
-			this->btnMainMenu->Text = L"Main Menu";
-			this->btnMainMenu->UseVisualStyleBackColor = true;
+			this->btnDelete->Click += gcnew System::EventHandler(this, &StudentsInfo::btnDelete_Click);
 			// 
 			// btnGoBack
 			// 
 			this->btnGoBack->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 19.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(238)));
-			this->btnGoBack->Location = System::Drawing::Point(0, 6);
+			this->btnGoBack->Location = System::Drawing::Point(12, 8);
 			this->btnGoBack->Name = L"btnGoBack";
 			this->btnGoBack->Size = System::Drawing::Size(129, 90);
 			this->btnGoBack->TabIndex = 31;
@@ -326,7 +316,6 @@ namespace Dziennik {
 			this->ClientSize = System::Drawing::Size(1382, 753);
 			this->Controls->Add(this->dataGridView2);
 			this->Controls->Add(this->btnGoBack);
-			this->Controls->Add(this->btnMainMenu);
 			this->Controls->Add(this->btnDelete);
 			this->Controls->Add(this->btnReset);
 			this->Controls->Add(this->btnUpdate);
@@ -372,6 +361,7 @@ namespace Dziennik {
 		}
 		catch (Exception^ ex) {
 			MessageBox::Show(ex->Message, "C++ AccessDataBase Connector", MessageBoxButtons::OK, MessageBoxIcon::Error);
+			conn->Close();
 		}
 	}
 
@@ -399,7 +389,26 @@ namespace Dziennik {
 	}
 
 	private: System::Void btnAdd_Click(System::Object^ sender, System::EventArgs^ e) {
-
+		try {
+			conn->Open();
+			OleDbCommand^ cmd = conn->CreateCommand();
+			cmd->CommandType = CommandType::Text;
+			cmd->CommandText = "INSERT INTO UczniowieInfo(StudentID, Firstname, Surname, Address, PostCode, Telephone)values(?,?,?,?,?,?)";
+			cmd->Parameters->AddWithValue("@StudentID", txtStudentID->Text);
+			cmd->Parameters->AddWithValue("@Firstname", txtFirstname->Text);
+			cmd->Parameters->AddWithValue("@Surname", txtSurname->Text);
+			cmd->Parameters->AddWithValue("@Address", txtAddress->Text);
+			cmd->Parameters->AddWithValue("@PostCode", txtPostCode->Text);
+			cmd->Parameters->AddWithValue("@Telephone", txtTelephone->Text);
+			cmd->ExecuteNonQuery();
+			conn->Close();
+			MessageBox::Show("Record is Successfully Added", "C++ AccessDatabase Connector", MessageBoxButtons::OK, MessageBoxIcon::Information);
+			ConnectionDB();
+		}
+		catch (Exception^ ex) {
+			MessageBox::Show(ex->Message, "C++ AccessDatabase Connector", MessageBoxButtons::OK, MessageBoxIcon::Error);
+			conn->Close();
+		}
 	}
 	private: System::Void txtSearch_TextChanged(System::Object^ sender, System::EventArgs^ e) {
 		try {
@@ -425,6 +434,53 @@ namespace Dziennik {
 		catch (Exception^ ex) {
 			MessageBox::Show(ex->Message, "C++ AccessDatabase Connector", MessageBoxButtons::OK, MessageBoxIcon::Error);
 			conn->Close();
+		}
+	}
+
+		   void Clear() {
+			   txtStudentID->Text = "";
+			   txtFirstname->Text = "";
+			   txtSurname->Text = "";
+			   txtAddress->Text = "";
+			   txtPostCode->Text = "";
+			   txtTelephone->Text = "";
+			   txtSearch->Text = "";
+		}
+
+	private: System::Void btnDelete_Click(System::Object^ sender, System::EventArgs^ e) {
+		try {
+				System::Windows::Forms::DialogResult iDelete;
+				conn->Open();
+				OleDbCommand^ cmd = conn->CreateCommand();
+				OleDbCommand^ cmd1 = conn->CreateCommand();
+				cmd->CommandType = CommandType::Text;
+				cmd1->CommandType = CommandType::Text;
+				cmd->CommandText = "DELETE * FROM UczniowieInfo WHERE StudentID = ?";
+				cmd->Parameters->AddWithValue("@StudentID", txtStudentID->Text);
+				cmd1->CommandText = "DELETE * FROM Obecnosc WHERE StudentID = ?";
+				cmd1->Parameters->AddWithValue("@StudentID", txtStudentID->Text);
+				iDelete = MessageBox::Show("Confirm if you want to delete", "C++ AccessDatabase Connector", MessageBoxButtons::YesNo, MessageBoxIcon::Question);
+				if (iDelete == System::Windows::Forms::DialogResult::Yes) {
+					cmd->ExecuteNonQuery();
+					cmd1->ExecuteNonQuery();
+					MessageBox::Show("Record Deleted Successfully", "C++ AccessDatabase Connector", MessageBoxButtons::OK, MessageBoxIcon::Information);
+				}
+				conn->Close();
+				ConnectionDB();
+				Clear();
+		}
+		catch (Exception^ ex) {
+			MessageBox::Show(ex->Message, "C++ AccessDatabase Connector", MessageBoxButtons::OK, MessageBoxIcon::Error);
+			conn->Close();
+		}
+		
+	}
+	private: System::Void btnReset_Click(System::Object^ sender, System::EventArgs^ e) {
+		try {
+
+		}
+		catch (Exception^ ex) {
+			MessageBox::Show
 		}
 	}
 };
