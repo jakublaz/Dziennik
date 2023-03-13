@@ -71,9 +71,10 @@ namespace Dziennik {
 			// 
 			// btnGoBack
 			// 
-			this->btnGoBack->Location = System::Drawing::Point(55, 12);
+			this->btnGoBack->Location = System::Drawing::Point(41, 10);
+			this->btnGoBack->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->btnGoBack->Name = L"btnGoBack";
-			this->btnGoBack->Size = System::Drawing::Size(77, 40);
+			this->btnGoBack->Size = System::Drawing::Size(58, 32);
 			this->btnGoBack->TabIndex = 0;
 			this->btnGoBack->Text = L"Go Back";
 			this->btnGoBack->UseVisualStyleBackColor = true;
@@ -81,20 +82,24 @@ namespace Dziennik {
 			// 
 			// dateTimePicker1
 			// 
-			this->dateTimePicker1->Location = System::Drawing::Point(178, 30);
+			this->dateTimePicker1->Format = System::Windows::Forms::DateTimePickerFormat::Short;
+			this->dateTimePicker1->Location = System::Drawing::Point(134, 24);
+			this->dateTimePicker1->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->dateTimePicker1->Name = L"dateTimePicker1";
-			this->dateTimePicker1->Size = System::Drawing::Size(1121, 22);
+			this->dateTimePicker1->Size = System::Drawing::Size(842, 20);
 			this->dateTimePicker1->TabIndex = 1;
+			this->dateTimePicker1->Value = System::DateTime(2023, 3, 13, 0, 0, 0, 0);
 			// 
 			// dataGridView1
 			// 
 			this->dataGridView1->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->dataGridView1->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(1) { this->checkAttendance });
-			this->dataGridView1->Location = System::Drawing::Point(18, 73);
+			this->dataGridView1->Location = System::Drawing::Point(14, 59);
+			this->dataGridView1->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->dataGridView1->Name = L"dataGridView1";
 			this->dataGridView1->RowHeadersWidth = 51;
 			this->dataGridView1->RowTemplate->Height = 24;
-			this->dataGridView1->Size = System::Drawing::Size(1352, 668);
+			this->dataGridView1->Size = System::Drawing::Size(1014, 543);
 			this->dataGridView1->TabIndex = 2;
 			// 
 			// checkAttendance
@@ -109,12 +114,13 @@ namespace Dziennik {
 			// MyForm1
 			// 
 			this->AccessibleName = L"";
-			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
+			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(1382, 753);
+			this->ClientSize = System::Drawing::Size(1036, 612);
 			this->Controls->Add(this->dataGridView1);
 			this->Controls->Add(this->dateTimePicker1);
 			this->Controls->Add(this->btnGoBack);
+			this->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->Name = L"MyForm1";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Attendance";
