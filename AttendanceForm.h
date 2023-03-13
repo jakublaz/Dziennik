@@ -44,7 +44,7 @@ namespace Dziennik {
 	private: System::Windows::Forms::Label^ label2;
 	private: System::Windows::Forms::TextBox^ txtFirstname;
 	private: System::Windows::Forms::Button^ btnPresent;
-	private: System::Windows::Forms::Button^ btnAbsent;
+
 	private: System::Windows::Forms::Label^ label12;
 	private: System::Windows::Forms::TextBox^ txtStudentID;
 
@@ -77,7 +77,6 @@ namespace Dziennik {
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->txtFirstname = (gcnew System::Windows::Forms::TextBox());
 			this->btnPresent = (gcnew System::Windows::Forms::Button());
-			this->btnAbsent = (gcnew System::Windows::Forms::Button());
 			this->label12 = (gcnew System::Windows::Forms::Label());
 			this->txtStudentID = (gcnew System::Windows::Forms::TextBox());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
@@ -174,17 +173,6 @@ namespace Dziennik {
 			this->btnPresent->UseVisualStyleBackColor = true;
 			this->btnPresent->Click += gcnew System::EventHandler(this, &MyForm1::btnPresent_Click);
 			// 
-			// btnAbsent
-			// 
-			this->btnAbsent->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 30, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(238)));
-			this->btnAbsent->Location = System::Drawing::Point(32, 414);
-			this->btnAbsent->Name = L"btnAbsent";
-			this->btnAbsent->Size = System::Drawing::Size(488, 80);
-			this->btnAbsent->TabIndex = 24;
-			this->btnAbsent->Text = L"Absent";
-			this->btnAbsent->UseVisualStyleBackColor = true;
-			// 
 			// label12
 			// 
 			this->label12->AutoSize = true;
@@ -216,7 +204,6 @@ namespace Dziennik {
 			this->ClientSize = System::Drawing::Size(1036, 612);
 			this->Controls->Add(this->label12);
 			this->Controls->Add(this->txtStudentID);
-			this->Controls->Add(this->btnAbsent);
 			this->Controls->Add(this->btnPresent);
 			this->Controls->Add(this->label3);
 			this->Controls->Add(this->txtSurname);
@@ -274,15 +261,15 @@ namespace Dziennik {
 		}
 	}
 	private: System::Void btnPresent_Click(System::Object^ sender, System::EventArgs^ e) {
-		MessageBox::Show(dateTimePicker1->Value.ToString());
 		try {
 			conn->Open();
 			OleDbCommand^ cmd = conn->CreateCommand();
+			DateTime datea = DateTime::Today;
 			cmd->CommandType = CommandType::Text;
-			cmd->CommandText = "INSERT INTO Obecnosc(StudentID,Was)values(?,?)";
+			cmd->CommandText = "INSERT INTO Obecnosc(StudentID, Was) VALUES (?, ?)";
 			cmd->Parameters->AddWithValue("@StudentID", txtStudentID->Text);
-			//cmd->Parameters->AddWithValue("@Date", dateTimePicker1->Value);
-			cmd->Parameters->AddWithValue("@Was", 1);
+			//cmd->Parameters->AddWithValue("@Date", datea.ToString("MM-dd-yyyy"));
+			cmd->Parameters->AddWithValue("@Was",dateTimePicker1->Value);
 			cmd->ExecuteNonQuery();
 
 			conn->Close();
