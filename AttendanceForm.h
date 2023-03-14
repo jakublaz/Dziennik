@@ -54,6 +54,7 @@ namespace Dziennik {
 
 
 
+
 	protected:
 
 	private:
@@ -84,10 +85,10 @@ namespace Dziennik {
 			// 
 			// btnGoBack
 			// 
-			this->btnGoBack->Location = System::Drawing::Point(41, 10);
-			this->btnGoBack->Margin = System::Windows::Forms::Padding(2);
+			this->btnGoBack->Location = System::Drawing::Point(55, 12);
+			this->btnGoBack->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->btnGoBack->Name = L"btnGoBack";
-			this->btnGoBack->Size = System::Drawing::Size(58, 32);
+			this->btnGoBack->Size = System::Drawing::Size(77, 39);
 			this->btnGoBack->TabIndex = 0;
 			this->btnGoBack->Text = L"Go Back";
 			this->btnGoBack->UseVisualStyleBackColor = true;
@@ -96,22 +97,22 @@ namespace Dziennik {
 			// dateTimePicker1
 			// 
 			this->dateTimePicker1->Format = System::Windows::Forms::DateTimePickerFormat::Short;
-			this->dateTimePicker1->Location = System::Drawing::Point(134, 24);
-			this->dateTimePicker1->Margin = System::Windows::Forms::Padding(2);
+			this->dateTimePicker1->Location = System::Drawing::Point(179, 30);
+			this->dateTimePicker1->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->dateTimePicker1->Name = L"dateTimePicker1";
-			this->dateTimePicker1->Size = System::Drawing::Size(842, 20);
+			this->dateTimePicker1->Size = System::Drawing::Size(1121, 22);
 			this->dateTimePicker1->TabIndex = 1;
-			this->dateTimePicker1->Value = System::DateTime(2023, 3, 13, 0, 0, 0, 0);
+			this->dateTimePicker1->Value = System::DateTime::Today;
 			// 
 			// dataGridView1
 			// 
 			this->dataGridView1->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-			this->dataGridView1->Location = System::Drawing::Point(566, 48);
-			this->dataGridView1->Margin = System::Windows::Forms::Padding(2);
+			this->dataGridView1->Location = System::Drawing::Point(755, 59);
+			this->dataGridView1->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->dataGridView1->Name = L"dataGridView1";
 			this->dataGridView1->RowHeadersWidth = 51;
 			this->dataGridView1->RowTemplate->Height = 24;
-			this->dataGridView1->Size = System::Drawing::Size(459, 553);
+			this->dataGridView1->Size = System::Drawing::Size(612, 681);
 			this->dataGridView1->TabIndex = 2;
 			this->dataGridView1->CellClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &MyForm1::dataGridView1_CellClick);
 			// 
@@ -120,10 +121,9 @@ namespace Dziennik {
 			this->label3->AutoSize = true;
 			this->label3->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 30, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(238)));
-			this->label3->Location = System::Drawing::Point(24, 207);
-			this->label3->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
+			this->label3->Location = System::Drawing::Point(32, 255);
 			this->label3->Name = L"label3";
-			this->label3->Size = System::Drawing::Size(181, 46);
+			this->label3->Size = System::Drawing::Size(229, 58);
 			this->label3->TabIndex = 22;
 			this->label3->Text = L"Surname";
 			// 
@@ -131,11 +131,11 @@ namespace Dziennik {
 			// 
 			this->txtSurname->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 30, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(238)));
-			this->txtSurname->Location = System::Drawing::Point(232, 207);
-			this->txtSurname->Margin = System::Windows::Forms::Padding(2);
+			this->txtSurname->Location = System::Drawing::Point(309, 255);
+			this->txtSurname->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->txtSurname->Multiline = true;
 			this->txtSurname->Name = L"txtSurname";
-			this->txtSurname->Size = System::Drawing::Size(288, 55);
+			this->txtSurname->Size = System::Drawing::Size(383, 67);
 			this->txtSurname->TabIndex = 21;
 			// 
 			// label2
@@ -143,10 +143,9 @@ namespace Dziennik {
 			this->label2->AutoSize = true;
 			this->label2->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 30, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(238)));
-			this->label2->Location = System::Drawing::Point(24, 139);
-			this->label2->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
+			this->label2->Location = System::Drawing::Point(32, 171);
 			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(196, 46);
+			this->label2->Size = System::Drawing::Size(249, 58);
 			this->label2->TabIndex = 20;
 			this->label2->Text = L"Firstname";
 			// 
@@ -154,20 +153,21 @@ namespace Dziennik {
 			// 
 			this->txtFirstname->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 30, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(238)));
-			this->txtFirstname->Location = System::Drawing::Point(232, 139);
-			this->txtFirstname->Margin = System::Windows::Forms::Padding(2);
+			this->txtFirstname->Location = System::Drawing::Point(309, 171);
+			this->txtFirstname->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->txtFirstname->Multiline = true;
 			this->txtFirstname->Name = L"txtFirstname";
-			this->txtFirstname->Size = System::Drawing::Size(288, 55);
+			this->txtFirstname->Size = System::Drawing::Size(383, 67);
 			this->txtFirstname->TabIndex = 19;
 			// 
 			// btnPresent
 			// 
 			this->btnPresent->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 30, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(238)));
-			this->btnPresent->Location = System::Drawing::Point(32, 309);
+			this->btnPresent->Location = System::Drawing::Point(43, 380);
+			this->btnPresent->Margin = System::Windows::Forms::Padding(4);
 			this->btnPresent->Name = L"btnPresent";
-			this->btnPresent->Size = System::Drawing::Size(488, 84);
+			this->btnPresent->Size = System::Drawing::Size(651, 103);
 			this->btnPresent->TabIndex = 23;
 			this->btnPresent->Text = L"Present";
 			this->btnPresent->UseVisualStyleBackColor = true;
@@ -178,10 +178,9 @@ namespace Dziennik {
 			this->label12->AutoSize = true;
 			this->label12->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 30, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(238)));
-			this->label12->Location = System::Drawing::Point(24, 71);
-			this->label12->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
+			this->label12->Location = System::Drawing::Point(32, 87);
 			this->label12->Name = L"label12";
-			this->label12->Size = System::Drawing::Size(207, 46);
+			this->label12->Size = System::Drawing::Size(261, 58);
 			this->label12->TabIndex = 26;
 			this->label12->Text = L"Student ID";
 			// 
@@ -189,19 +188,19 @@ namespace Dziennik {
 			// 
 			this->txtStudentID->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 30, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(238)));
-			this->txtStudentID->Location = System::Drawing::Point(232, 71);
-			this->txtStudentID->Margin = System::Windows::Forms::Padding(2);
+			this->txtStudentID->Location = System::Drawing::Point(309, 87);
+			this->txtStudentID->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->txtStudentID->Multiline = true;
 			this->txtStudentID->Name = L"txtStudentID";
-			this->txtStudentID->Size = System::Drawing::Size(288, 55);
+			this->txtStudentID->Size = System::Drawing::Size(383, 67);
 			this->txtStudentID->TabIndex = 25;
 			// 
 			// MyForm1
 			// 
 			this->AccessibleName = L"";
-			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
+			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(1036, 612);
+			this->ClientSize = System::Drawing::Size(1381, 753);
 			this->Controls->Add(this->label12);
 			this->Controls->Add(this->txtStudentID);
 			this->Controls->Add(this->btnPresent);
@@ -212,7 +211,7 @@ namespace Dziennik {
 			this->Controls->Add(this->dataGridView1);
 			this->Controls->Add(this->dateTimePicker1);
 			this->Controls->Add(this->btnGoBack);
-			this->Margin = System::Windows::Forms::Padding(2);
+			this->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->Name = L"MyForm1";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Attendance";
@@ -222,7 +221,7 @@ namespace Dziennik {
 			this->PerformLayout();
 
 		}
-#pragma endregion
+#pragma endregion 
 	OleDbConnection^ conn = gcnew OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\\portfolio\\Dziennik\\dziennik.accdb");
 
 	void ConnectionDB() {
