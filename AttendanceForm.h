@@ -47,6 +47,7 @@ namespace Dziennik {
 
 	private: System::Windows::Forms::Label^ label12;
 	private: System::Windows::Forms::TextBox^ txtStudentID;
+	private: System::Windows::Forms::DataGridView^ dataGridView2;
 
 
 
@@ -80,7 +81,9 @@ namespace Dziennik {
 			this->btnPresent = (gcnew System::Windows::Forms::Button());
 			this->label12 = (gcnew System::Windows::Forms::Label());
 			this->txtStudentID = (gcnew System::Windows::Forms::TextBox());
+			this->dataGridView2 = (gcnew System::Windows::Forms::DataGridView());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView2))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// btnGoBack
@@ -102,7 +105,8 @@ namespace Dziennik {
 			this->dateTimePicker1->Name = L"dateTimePicker1";
 			this->dateTimePicker1->Size = System::Drawing::Size(1121, 22);
 			this->dateTimePicker1->TabIndex = 1;
-			this->dateTimePicker1->Value = System::DateTime::Today;
+			this->dateTimePicker1->Value = System::DateTime(2023, 3, 14, 0, 0, 0, 0);
+			this->dateTimePicker1->ValueChanged += gcnew System::EventHandler(this, &MyForm1::dateTimePicker1_ValueChanged);
 			// 
 			// dataGridView1
 			// 
@@ -112,7 +116,7 @@ namespace Dziennik {
 			this->dataGridView1->Name = L"dataGridView1";
 			this->dataGridView1->RowHeadersWidth = 51;
 			this->dataGridView1->RowTemplate->Height = 24;
-			this->dataGridView1->Size = System::Drawing::Size(612, 681);
+			this->dataGridView1->Size = System::Drawing::Size(612, 371);
 			this->dataGridView1->TabIndex = 2;
 			this->dataGridView1->CellClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &MyForm1::dataGridView1_CellClick);
 			// 
@@ -195,12 +199,24 @@ namespace Dziennik {
 			this->txtStudentID->Size = System::Drawing::Size(383, 67);
 			this->txtStudentID->TabIndex = 25;
 			// 
+			// dataGridView2
+			// 
+			this->dataGridView2->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+			this->dataGridView2->Location = System::Drawing::Point(755, 434);
+			this->dataGridView2->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+			this->dataGridView2->Name = L"dataGridView2";
+			this->dataGridView2->RowHeadersWidth = 51;
+			this->dataGridView2->RowTemplate->Height = 24;
+			this->dataGridView2->Size = System::Drawing::Size(612, 308);
+			this->dataGridView2->TabIndex = 27;
+			// 
 			// MyForm1
 			// 
 			this->AccessibleName = L"";
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(1381, 753);
+			this->Controls->Add(this->dataGridView2);
 			this->Controls->Add(this->label12);
 			this->Controls->Add(this->txtStudentID);
 			this->Controls->Add(this->btnPresent);
@@ -217,6 +233,7 @@ namespace Dziennik {
 			this->Text = L"Attendance";
 			this->Load += gcnew System::EventHandler(this, &MyForm1::MyForm1_Load);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView2))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -236,6 +253,21 @@ namespace Dziennik {
 			OleDbDataAdapter^ dp = gcnew OleDbDataAdapter(cmd);
 			dp->Fill(dt);
 			dataGridView1->DataSource = dt;
+			conn->Close();
+
+			//second table with student that were present that day
+			conn->Open();
+			cmd = conn->CreateCommand();
+			cmd->CommandType = CommandType::Text;
+			cmd->CommandText = "SELECT Obecnosc.StudentID,Firstname,Surname FROM Obecnosc INNER JOIN UczniowieInfo ON Obecnosc.StudentID = UczniowieInfo.StudentID WHERE Was = ?";
+			cmd->Parameters->AddWithValue("@Was", dateTimePicker1->Value);
+			cmd->ExecuteNonQuery();
+
+
+			DataTable^ dtt = gcnew DataTable();
+			OleDbDataAdapter^ dpp = gcnew OleDbDataAdapter(cmd);
+			dpp->Fill(dtt);
+			dataGridView2->DataSource = dtt;
 			conn->Close();
 		}
 		catch (Exception^ ex) {
@@ -263,11 +295,9 @@ namespace Dziennik {
 		try {
 			conn->Open();
 			OleDbCommand^ cmd = conn->CreateCommand();
-			DateTime datea = DateTime::Today;
 			cmd->CommandType = CommandType::Text;
 			cmd->CommandText = "INSERT INTO Obecnosc(StudentID, Was) VALUES (?, ?)";
 			cmd->Parameters->AddWithValue("@StudentID", txtStudentID->Text);
-			//cmd->Parameters->AddWithValue("@Date", datea.ToString("MM-dd-yyyy"));
 			cmd->Parameters->AddWithValue("@Was",dateTimePicker1->Value);
 			cmd->ExecuteNonQuery();
 
@@ -279,6 +309,9 @@ namespace Dziennik {
 			conn->Close();
 			MessageBox::Show(ex->Message, "C++ AccessDatabase Connector", MessageBoxButtons::OK, MessageBoxIcon::Information);
 		}
+	}
+	private: System::Void dateTimePicker1_ValueChanged(System::Object^ sender, System::EventArgs^ e) {
+		ConnectionDB();
 	}
 };
 }

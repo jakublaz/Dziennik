@@ -261,6 +261,7 @@ namespace Dziennik {
 			this->btnUpdate->TabIndex = 27;
 			this->btnUpdate->Text = L"Update";
 			this->btnUpdate->UseVisualStyleBackColor = true;
+			this->btnUpdate->Click += gcnew System::EventHandler(this, &StudentsInfo::btnUpdate_Click);
 			// 
 			// btnReset
 			// 
@@ -486,6 +487,9 @@ namespace Dziennik {
 		catch (Exception^ ex) {
 			MessageBox::Show(ex->Message, "C++ AccessDatabase Connector", MessageBoxButtons::OK, MessageBoxIcon::Information);
 		}
+	}
+	private: System::Void btnUpdate_Click(System::Object^ sender, System::EventArgs^ e) {
+		//do zrobienia
 	}
 };
 }
