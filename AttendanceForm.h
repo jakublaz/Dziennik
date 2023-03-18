@@ -48,6 +48,9 @@ namespace Dziennik {
 	private: System::Windows::Forms::Label^ label12;
 	private: System::Windows::Forms::TextBox^ txtStudentID;
 	private: System::Windows::Forms::DataGridView^ dataGridView2;
+	private: System::Windows::Forms::Button^ btnReset;
+	private: System::Windows::Forms::Button^ btnAbsent;
+	private: System::Windows::Forms::Label^ label1;
 
 
 
@@ -82,6 +85,9 @@ namespace Dziennik {
 			this->label12 = (gcnew System::Windows::Forms::Label());
 			this->txtStudentID = (gcnew System::Windows::Forms::TextBox());
 			this->dataGridView2 = (gcnew System::Windows::Forms::DataGridView());
+			this->btnReset = (gcnew System::Windows::Forms::Button());
+			this->btnAbsent = (gcnew System::Windows::Forms::Button());
+			this->label1 = (gcnew System::Windows::Forms::Label());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView2))->BeginInit();
 			this->SuspendLayout();
@@ -103,7 +109,7 @@ namespace Dziennik {
 			this->dateTimePicker1->Location = System::Drawing::Point(179, 30);
 			this->dateTimePicker1->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->dateTimePicker1->Name = L"dateTimePicker1";
-			this->dateTimePicker1->Size = System::Drawing::Size(1121, 22);
+			this->dateTimePicker1->Size = System::Drawing::Size(515, 22);
 			this->dateTimePicker1->TabIndex = 1;
 			this->dateTimePicker1->Value = System::DateTime(2023, 3, 14, 0, 0, 0, 0);
 			this->dateTimePicker1->ValueChanged += gcnew System::EventHandler(this, &MyForm1::dateTimePicker1_ValueChanged);
@@ -111,7 +117,7 @@ namespace Dziennik {
 			// dataGridView1
 			// 
 			this->dataGridView1->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-			this->dataGridView1->Location = System::Drawing::Point(755, 59);
+			this->dataGridView1->Location = System::Drawing::Point(755, 11);
 			this->dataGridView1->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->dataGridView1->Name = L"dataGridView1";
 			this->dataGridView1->RowHeadersWidth = 51;
@@ -209,6 +215,42 @@ namespace Dziennik {
 			this->dataGridView2->RowTemplate->Height = 24;
 			this->dataGridView2->Size = System::Drawing::Size(612, 308);
 			this->dataGridView2->TabIndex = 27;
+			this->dataGridView2->CellClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &MyForm1::dataGridView2_CellClick);
+			// 
+			// btnReset
+			// 
+			this->btnReset->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 30, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(238)));
+			this->btnReset->Location = System::Drawing::Point(41, 637);
+			this->btnReset->Margin = System::Windows::Forms::Padding(4);
+			this->btnReset->Name = L"btnReset";
+			this->btnReset->Size = System::Drawing::Size(651, 103);
+			this->btnReset->TabIndex = 28;
+			this->btnReset->Text = L"Reset";
+			this->btnReset->UseVisualStyleBackColor = true;
+			// 
+			// btnAbsent
+			// 
+			this->btnAbsent->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 30, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(238)));
+			this->btnAbsent->Location = System::Drawing::Point(43, 503);
+			this->btnAbsent->Margin = System::Windows::Forms::Padding(4);
+			this->btnAbsent->Name = L"btnAbsent";
+			this->btnAbsent->Size = System::Drawing::Size(651, 103);
+			this->btnAbsent->TabIndex = 29;
+			this->btnAbsent->Text = L"Absent";
+			this->btnAbsent->UseVisualStyleBackColor = true;
+			// 
+			// label1
+			// 
+			this->label1->AutoSize = true;
+			this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 19.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(238)));
+			this->label1->Location = System::Drawing::Point(1009, 393);
+			this->label1->Name = L"label1";
+			this->label1->Size = System::Drawing::Size(134, 39);
+			this->label1->TabIndex = 30;
+			this->label1->Text = L"Present";
 			// 
 			// MyForm1
 			// 
@@ -216,6 +258,9 @@ namespace Dziennik {
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(1381, 753);
+			this->Controls->Add(this->label1);
+			this->Controls->Add(this->btnAbsent);
+			this->Controls->Add(this->btnReset);
 			this->Controls->Add(this->dataGridView2);
 			this->Controls->Add(this->label12);
 			this->Controls->Add(this->txtStudentID);
@@ -291,7 +336,7 @@ namespace Dziennik {
 			conn->Close();
 		}
 	}
-	private: System::Void btnPresent_Click(System::Object^ sender, System::EventArgs^ e) {
+	private: System::Void btnPresent_Click(System::Object^ sender, System::EventArgs^ e) {	//function adds the thing to database
 		try {
 			conn->Open();
 			OleDbCommand^ cmd = conn->CreateCommand();
@@ -312,6 +357,17 @@ namespace Dziennik {
 	}
 	private: System::Void dateTimePicker1_ValueChanged(System::Object^ sender, System::EventArgs^ e) {
 		ConnectionDB();
+	}
+	private: System::Void dataGridView2_CellClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
+		try {
+			txtStudentID->Text = dataGridView2->SelectedRows[0]->Cells[0]->Value->ToString();
+			txtFirstname->Text = dataGridView2->SelectedRows[0]->Cells[1]->Value->ToString();
+			txtSurname->Text = dataGridView2->SelectedRows[0]->Cells[2]->Value->ToString();
+		}
+		catch (Exception^ ex) {
+			MessageBox::Show(ex->Message, "C++ AccessDatabase Connector", MessageBoxButtons::OK, MessageBoxIcon::Error);
+			conn->Close();
+		}
 	}
 };
 }
